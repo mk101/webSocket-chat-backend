@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -62,4 +64,7 @@ public class UserService implements UserDetailsManager {
         return userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("%s not found", username)));
     }
 
+    public UserDetails loadUserById(UUID id) throws UsernameNotFoundException {
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 }
