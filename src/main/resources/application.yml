@@ -1,0 +1,12 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://database:5432/chat?WriteBatchedInsert=true
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+        hikari:
+            maximum-pool-size: 25
+    jpa:
+        properties:
+            hibernate:
+                globally_quoted_identifiers: true

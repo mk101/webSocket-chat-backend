@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:latest
+    container_name: database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=chat
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+
+  liquibase:
+    image: liquibase/liquibase
+    container_name: liquibase
+    depends_on:
+      - database
+    volumes:
+      - ./liquibase/:/liquibase/database
+    command: sh -c "sleep 20 && liquibase --defaults-file=/liquibase/database/liquibase.properties --search-path=/liquibase/database/ update"
