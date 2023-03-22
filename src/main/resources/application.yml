@@ -1,3 +1,6 @@
+api-v1:
+    url: api/v1
+
 spring:
     datasource:
         url: jdbc:postgresql://database:5432/chat?WriteBatchedInsert=true
@@ -10,3 +13,5 @@ spring:
         properties:
             hibernate:
                 globally_quoted_identifiers: true
+    config:
+        import: application.secrets.yml
