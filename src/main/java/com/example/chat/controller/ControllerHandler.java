@@ -7,6 +7,7 @@ import com.example.chat.exception.RefreshTokenSessionException;
 import com.example.chat.exception.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,7 +29,8 @@ public class ControllerHandler {
 
     @ExceptionHandler(value = {
             RefreshTokenSessionException.class,
-            UserAlreadyExistsException.class
+            UserAlreadyExistsException.class,
+            UsernameNotFoundException.class
     })
     public ResponseEntity<ErrorDto> catchExceptions(RuntimeException e) {
         return ResponseEntity.badRequest().body(new ErrorDto(e.getMessage()));
