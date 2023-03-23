@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authorize -> authorize
                                 .requestMatchers(url + "/auth/login", url + "/auth/register", url + "/auth/refresh").permitAll()
-                                .requestMatchers("/stomp/**").permitAll()
+                                .requestMatchers("/ws", "/stomp").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .cors().and()
