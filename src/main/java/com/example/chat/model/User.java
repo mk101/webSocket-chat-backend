@@ -1,17 +1,16 @@
 package com.example.chat.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +18,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"conversations", "messages"})
 public class User implements UserDetails {
     @Id
     private UUID id;
@@ -34,6 +34,12 @@ public class User implements UserDetails {
 
     @Column(name = "refresh_token", nullable = false)
     private String refreshToken;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Conversation> conversations;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Message> messages;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

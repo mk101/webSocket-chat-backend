@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-conversations" author="Maxim Kolesov">
+        <createTable tableName="conversations">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="first_user" type="uuid">
+                <constraints nullable="false" foreignKeyName="conversations_first_user_fk" references="users(id)"/>
+            </column>
+            <column name="second_user" type="uuid">
+                <constraints nullable="false" foreignKeyName="conversations_second_user_fk" references="users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
