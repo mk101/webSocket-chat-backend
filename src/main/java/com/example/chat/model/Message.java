@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +19,9 @@ public class Message {
 
     @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
+    private Timestamp timestamp;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user", nullable = false)
