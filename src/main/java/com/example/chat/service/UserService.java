@@ -1,6 +1,8 @@
 package com.example.chat.service;
 
+import com.example.chat.dto.UserDto;
 import com.example.chat.exception.UserAlreadyExistsException;
+import com.example.chat.mapper.UserMapper;
 import com.example.chat.model.User;
 import com.example.chat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,7 @@ import java.util.UUID;
 public class UserService implements UserDetailsManager {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final UserMapper userMapper;
 
     @Override
     public void createUser(UserDetails user) throws UserAlreadyExistsException {
@@ -66,5 +68,10 @@ public class UserService implements UserDetailsManager {
 
     public UserDetails loadUserById(UUID id) throws UsernameNotFoundException {
         return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    public UserDto loadUserDtoById(UUID id) throws UsernameNotFoundException {
+        User user = (User) loadUserById(id);
+        return userMapper.map(user);
     }
 }
