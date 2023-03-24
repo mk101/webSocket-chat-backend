@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +15,7 @@ public class MessageDto {
     @NotBlank(message = "content is required")
     private String content;
 
-    private Timestamp timestamp;
+    private long timestamp;
 
     @JsonProperty("user_id")
     @NotBlank(message = "user_id is required")
