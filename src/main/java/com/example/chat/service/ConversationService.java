@@ -8,6 +8,7 @@ import com.example.chat.repository.ConversationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,10 +17,6 @@ public class ConversationService {
     private final ConversationRepository conversationRepository;
     private final UserService userService;
     private final ConversationMapper mapper;
-
-    public boolean existById(UUID id) {
-        return conversationRepository.existsById(id);
-    }
 
     public Conversation getById(UUID id) throws IllegalArgumentException {
         return conversationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Unknown Conversation"));
@@ -41,5 +38,10 @@ public class ConversationService {
         conversationRepository.save(conversation);
 
         return mapper.map(conversation);
+    }
+
+    public List<ConversationDto> getAllDtoByUser(User user) {
+        List<Conversation> conversations = conversationRepository.findAllByUser(user.getId());
+        return conversations.stream().map(mapper::map).toList();
     }
 }
