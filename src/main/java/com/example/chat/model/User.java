@@ -18,7 +18,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"conversations", "messages"})
+@ToString(exclude = {"messages"})
 public class User implements UserDetails {
     @Id
     private UUID id;
@@ -35,10 +35,7 @@ public class User implements UserDetails {
     @Column(name = "refresh_token", nullable = false)
     private String refreshToken;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Conversation> conversations;
-
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Message> messages;
 
     @Override

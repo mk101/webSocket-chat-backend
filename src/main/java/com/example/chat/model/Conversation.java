@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,4 +24,7 @@ public class Conversation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "second_user", nullable = false)
     private User secondUser;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conversation")
+    List<Message> messages;
 }

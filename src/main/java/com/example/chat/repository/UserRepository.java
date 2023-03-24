@@ -14,10 +14,9 @@ import java.util.UUID;
 public interface UserRepository extends CrudRepository<User, UUID> {
     boolean existsUserByUsername(String username);
 
-    @EntityGraph(attributePaths = {"conversations"})
     Optional<User> findUserByUsername(String username);
 
-    @EntityGraph(attributePaths = {"conversations", "messages"})
+    @EntityGraph(attributePaths = {"messages"})
     @Query("SELECT u FROM User u WHERE u.username = :username")
     Optional<User> findFullUserByUsername(@Param("username") String username);
 }
