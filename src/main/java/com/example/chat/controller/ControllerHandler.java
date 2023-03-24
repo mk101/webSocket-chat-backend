@@ -30,7 +30,8 @@ public class ControllerHandler {
     @ExceptionHandler(value = {
             RefreshTokenSessionException.class,
             UserAlreadyExistsException.class,
-            UsernameNotFoundException.class
+            UsernameNotFoundException.class,
+            IllegalArgumentException.class
     })
     public ResponseEntity<ErrorDto> catchExceptions(RuntimeException e) {
         return ResponseEntity.badRequest().body(new ErrorDto(e.getMessage()));
