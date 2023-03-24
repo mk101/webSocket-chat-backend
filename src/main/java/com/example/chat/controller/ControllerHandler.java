@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice(assignableTypes = {
         AuthController.class,
         UserController.class,
-        ConversationController.class
+        ConversationController.class,
+        MessageController.class
 })
 public class ControllerHandler {
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})

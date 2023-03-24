@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,5 +41,10 @@ public class MessageService {
         messageRepository.save(message);
 
         return mapper.map(message);
+    }
+
+    public List<MessageDto> getAllDtoInConversation(UUID conversationId) {
+        Conversation conversation = conversationService.getById(conversationId);
+        return conversation.getMessages().stream().map(mapper::map).toList();
     }
 }
