@@ -74,4 +74,9 @@ public class UserService implements UserDetailsManager {
         User user = (User) loadUserById(id);
         return userMapper.map(user);
     }
+
+    public UserDto loadUserDtoByUsername(String username) throws UsernameNotFoundException {
+        User user = (User) loadUserByUsername(username);
+        return userMapper.map(user);
+    }
 }

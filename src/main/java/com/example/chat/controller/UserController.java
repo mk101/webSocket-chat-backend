@@ -29,4 +29,17 @@ public class UserController {
 
         return dto;
     }
+
+    @GetMapping("/byUsername/{username}")
+    public UserDto getUserByUsername(@PathVariable String username, @AuthenticationPrincipal User user) {
+        UserDto dto = userService.loadUserDtoByUsername(username);
+
+        if (!user.getId().equals(dto.getId())) {
+            dto.setPassword(null);
+            dto.setLogin(null);
+            dto.setRefreshToken(null);
+        }
+
+        return dto;
+    }
 }
