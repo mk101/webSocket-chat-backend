@@ -1,5 +1,6 @@
-package com.example.chat.security;
+package com.example.chat.config;
 
+import com.example.chat.security.AuthChannelInterceptorAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
